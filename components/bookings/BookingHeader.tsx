@@ -47,6 +47,21 @@ const BookingHeader = ({ movieShow }: any) => {
     }
     return resData;
   };
+  const [coupon, setCoupon] = useState(""); // State for the coupon input value
+  const [isButtonActive, setButtonActive] = useState(false);
+   // Function to handle changes in the coupon input
+   const handleCouponChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const couponValue = event.target.value;
+    setCoupon(couponValue);
+    setButtonActive(couponValue !== ''); // Enable the button if couponValue is not empty
+  };
+
+  // Function to handle button click
+  const handleApplyCoupon = () => {
+    // Perform coupon validation or any other related actions here
+   
+  };
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const x: object = {
@@ -100,10 +115,34 @@ const BookingHeader = ({ movieShow }: any) => {
         <h1>Number of seats: {seats.length}</h1>
         <h1>Price per seat: R{movieShow.movieRoom.seats[0].price}</h1>
         <h1>Total:R{movieShow.movieRoom.seats[0].price * seats.length}</h1>
+
+       {/* Coupon input field */}
+        <div className="mb-2">
+          <input
+            type="text"
+            placeholder="Coupon"
+            value={coupon}
+            onChange={handleCouponChange}
+          />
+        </div>
+
+        {/* Apply coupon button */}
         <button
-          disabled={seats.length == 0}
+          onClick={handleApplyCoupon}
+          className={`h-8 w-full p-1 ${
+            !isButtonActive
+              ? "bg-gray-400" // Disable button when coupon is empty
+              : "bg-blue-500"   // Change color when clicked
+          }`}
+          disabled={!isButtonActive}
+        >
+          Apply
+        </button>
+
+        <button
+          disabled={seats.length === 0}
           onClick={() => setShow(true)}
-          className={`h-8 w-full  p-1 ${
+          className={`h-8 w-full p-1 ${
             seats.length === 0 ? "bg-purple-500" : "bg-orange-600"
           }`}
         >
