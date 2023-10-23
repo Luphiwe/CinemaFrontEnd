@@ -22,18 +22,22 @@ const NavBar = () => {
       link: "/about",
     },
     {
-      name: "Contact",
-      link: "/contact",
-    },
-    {
       name: "Login/Register",
       link: "/login",
+    },
+    {
+      name: "Faq",
+      link: "/faq",
+    },
+    {
+      name: "Terms & conditions",
+      link: "/termsandconditions",
     },
   ];
   return (
     <div className="navbar p-4 top-0 w-full h-16 z-50 sticky text-gray-100 flex items-center justify-between">
       <div>
-        <Link href={"/"}>M$M</Link>
+        <Link href={"/"}>Saphire Screen Studios</Link>
       </div>
       <div className="flex justify-around">
         {links.map((link) => (
